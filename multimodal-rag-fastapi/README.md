@@ -86,3 +86,42 @@ Eğer işlem arka planda hala devam ediyorsa şu dönütü alırsınız:
 ```
 
 İşlem bittikten sonra tam cevabı alırsınız.
+
+## 🌟 Yayın Sonrası Geliştirmeler (Frontend & Dockerization)
+
+Projeyi yayın sonrasında geliştirmeye devam ettik, kullanıcı deneyimini ve dağıtım kolaylığını artırmak amacıyla aşağıdaki geliştirmeler eklenmiştir:
+
+### 🎨 Modern & Premium Frontend
+
+- **React 19 & TypeScript:** En güncel frontend teknolojileriyle hızlı ve tip güvenli bir yapı kuruldu.
+- **Tailwind CSS V4:** Modern, glassmorphic (buzlu cam efektli) ve karanlık mod odaklı premium bir arayüz tasarlandı.
+- **Zengin Metin (Markdown) Desteği:** AI yanıtlarının tablolar, kod blokları ve düzgün paragraf yapılarıyla sunulması için `react-markdown` ve Tailwind Typography plugin entegre edildi.
+- **Kullanıcı Dostu Geri Bildirimler:** Bilgi bankası oluşturma süreci için durum göstergeleri (Indexing, Success, Error) ve asenkron işlem takibi eklendi.
+
+### 🐳 Tam Stack Dockerizasyon (Orchestration)
+
+- **Multi-Stage Docker Imgeleri:** Frontend için Nginx ve Backend için `uv` tabanlı, optimize edilmiş ve hafif Docker imajları oluşturuldu.
+- **Docker Compose:** Backend, Frontend ve Weaviate servislerini tek bir ağda toplayan ve `docker-compose up --build` komutuyla tüm sistemi saniyeler içinde ayağa kaldıran orkestrasyon dosyası hazırlandı.
+- **İzole Çalışma Ortamı:** Yerel makinedeki Python veya Node.js bağımlılıklarından tamamen bağımsız, her ortamda aynı şekilde çalışan bir altyapı kuruldu.
+
+### 🔐 Gelişmiş Güvenlik ve Yapılandırma
+
+- **Secret Management:** API anahtarlarının güvenliği için `.env` ve `.env.example` yapısı kuruldu. `.gitignore` dosyası kök dizine eklenerek hassas dosyaların repoya sızması önlendi.
+- **Dinamik Networking:** Backend servisinin Docker içerisinde Weaviate konteynerine sorunsuz bağlanması için `WEAVIATE_URL` yapılandırması dinamik hale getirildi.
+
+### 🎙️ Tam Multimodal Destek (Görüntü, Video, Ses ve Doküman)
+
+- **Gemini Multimodal Embedding:** Sisteme sadece metin değil; Görüntü (PNG/JPG), Video (MOV/MP4 - 120sn limitli) ve Ses (MP3/WAV) dosyalarını da vektörleştirme yeteneği eklendi.
+- **Akıllı Doküman Parçalama (PDF Chunking):** Çok sayfalı PDF dosyaları, Gemini'ın bağlam penceresini en verimli şekilde kullanmak adına her 6 sayfada bir otomatik olarak parçalanır (chunking) ve indekslenir.
+- **Dinamik Dosya Keşfi:** `./documents` klasörüne atılan her yeni dosya, uzantısına göre (PDF, Görüntü, Video, Ses) otomatik olarak algılanır ve uygun işleyiciden geçirilerek bilgi bankasına dahil edilir.
+
+### 🔄 Gerçek Zamanlı Durum Takibi (Status Polling)
+
+- **Asenkron İşlem İzleme:** Kullanıcı "Start Embedding" butonuna bastığında, frontend arka planda `/api/status` ucunu belirli aralıklarla sorgulayarak (polling) işlemin bitip bitmediğini takip eder.
+- **Kullanıcı Deneyimi:** İşlem tamamlandığında arayüz otomatik olarak güncellenir ve kullanıcıya dokümanların sorgulanmaya hazır olduğu bilgisi ("Embedding process is done. You can query your documents.") verilir.
+
+### 🛠️ UI ve Altyapı İyileştirmeleri
+
+- **Dosya Türüne Özel İkonlar:** Upload Zone bileşeni, yüklenen dosyanın türüne göre (Görüntü, Video, Ses, Belge) otomatik olarak ilgili ikonu gösterir.
+- **Gelişmiş Docker Bağımlılık Yönetimi:** Backend konteynerinde `python-multipart` gibi dinamik form verisi işleyici eksiklikleri giderildi ve `uv.lock` senkronizasyonu ile deterministik bir kurulum sağlandı.
+
