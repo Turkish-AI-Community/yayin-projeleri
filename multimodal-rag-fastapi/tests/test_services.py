@@ -53,7 +53,6 @@ def test_embed_documents():
         mock_pdf_reader.return_value.pages = [mock_page]
 
         # Override the paths directly to avoid actually reading
-        with patch("app.services.rag_service.time.sleep"):  # disable sleep in test
-            count = rag_service.embed_documents()
+        count = rag_service.embed_documents()
 
         assert count > 0
