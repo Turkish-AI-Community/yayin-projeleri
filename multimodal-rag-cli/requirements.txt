@@ -1,0 +1,4 @@
+haystack-ai
+google-genai-haystack
+python-dotenv
+pypdf
